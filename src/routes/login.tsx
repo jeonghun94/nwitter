@@ -11,7 +11,7 @@ import {
   Title,
   Wrapper,
 } from "../components/auth-components";
-import GithubButton from "../components/github-btn";
+import GithubButton from "../components/button/github";
 
 export default function Login() {
   const navigate = useNavigate();
