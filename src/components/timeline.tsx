@@ -74,7 +74,6 @@ export default function Timeline() {
     <Wrapper>
       {tweets.map((tweet) => (
         <Link to={`/tweet/${tweet.id}`} key={tweet.id}>
-          {tweet.id}
           <Tweet key={tweet.id} {...tweet} />
         </Link>
       ))}
