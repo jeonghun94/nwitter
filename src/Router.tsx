@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./components/protected-router";
 import Layout from "./components/layout";
-import Home from "./routes/home";
-import Profile from "./routes/profile";
-import Login from "./routes/login";
-import CreateAccount from "./routes/create-account";
 import TweetDetail from "./pages/tweet/detail";
+import Home from "./pages/home";
+import Login from "./pages/login";
+import Profile from "./pages/profile";
+import CreateAccount from "./pages/create-account";
 
 const router = createBrowserRouter([
   {

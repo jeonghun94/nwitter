@@ -10,7 +10,6 @@ import { styled } from "styled-components";
 import { db } from "../firebase";
 import Tweet from "./tweet";
 import { Unsubscribe } from "firebase/auth";
-import { Link } from "react-router-dom";
 
 export interface ITweet {
   id: string;
@@ -23,7 +22,6 @@ export interface ITweet {
 
 const Wrapper = styled.div`
   display: flex;
-  gap: 10px;
   flex-direction: column;
   overflow-y: scroll;
 `;
@@ -73,9 +71,7 @@ export default function Timeline() {
   return (
     <Wrapper>
       {tweets.map((tweet) => (
-        <Link to={`/tweet/${tweet.id}`} key={tweet.id}>
-          <Tweet key={tweet.id} {...tweet} />
-        </Link>
+        <Tweet key={tweet.id} {...tweet} />
       ))}
     </Wrapper>
   );

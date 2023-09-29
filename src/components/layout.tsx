@@ -1,12 +1,10 @@
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { styled } from "styled-components";
-import { PATH_TITLE } from "@/constants";
 import NavBar from "./NavBar";
 // import { auth } from "../firebase";
 
 const Wrapper = styled.div`
   display: grid;
-  gap: 10px;
   grid-template-columns: 60px 5fr;
   height: 100%;
   width: 100%;

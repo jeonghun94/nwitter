@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { auth, db, storage } from "../firebase";
+import { auth, db, storage } from "@/firebase";
 import { useEffect, useState } from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
@@ -11,8 +11,8 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { ITweet } from "../components/timeline";
-import Tweet from "../components/tweet";
+import { ITweet } from "@/components/timeline";
+import Tweet from "@/components/tweet";
 
 const Wrapper = styled.div`
   display: flex;
@@ -76,7 +76,7 @@ export default function Profile() {
     const tweetQuery = query(
       collection(db, "tweets"),
       where("userId", "==", user?.uid),
-      orderBy("createdAt", "asc"),
+      orderBy("createdAt", "desc"),
       limit(25)
     );
     const snapshot = await getDocs(tweetQuery);

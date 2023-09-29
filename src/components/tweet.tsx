@@ -3,13 +3,13 @@ import { ITweet } from "./timeline";
 import { auth, db, storage } from "../firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
+import { Link } from "react-router-dom";
 
-const Wrapper = styled.div`
+const Wrapper = styled(Link)`
   display: grid;
   grid-template-columns: 3fr 1fr;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 15px;
+  border-bottom: 1px solid #38444d;
 `;
 
 const Column = styled.div`
@@ -77,7 +77,7 @@ export default function Tweet({ username, photo, tweet, userId, id }: ITweet) {
   };
 
   return (
-    <Wrapper>
+    <Wrapper to={`/tweet/${id}`}>
       <Column>
         <Username>{username}</Username>
         <Payload>{tweet}</Payload>
