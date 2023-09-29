@@ -5,7 +5,6 @@ import Home from "./routes/home";
 import Profile from "./routes/profile";
 import Login from "./routes/login";
 import CreateAccount from "./routes/create-account";
-import Tweet from "./components/tweet";
 import TweetDetail from "./pages/tweet/detail";
 
 const router = createBrowserRouter([
@@ -25,6 +24,10 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile />,
       },
+      {
+        path: "/tweet/:id",
+        element: <TweetDetail />,
+      },
     ],
   },
   {
@@ -34,10 +37,6 @@ const router = createBrowserRouter([
   {
     path: "/create-account",
     element: <CreateAccount />,
-  },
-  {
-    path: "/tweet/:id",
-    element: <TweetDetail />,
   },
 ]);
 

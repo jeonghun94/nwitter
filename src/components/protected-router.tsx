@@ -10,6 +10,5 @@ export default function ProtectedRoute({
   if (user === null) {
     return <Navigate to="/login" />;
   }
-  console.log(user, "dsds");
   return children;
 }

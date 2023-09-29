@@ -23,12 +23,6 @@ export default function TweetDetail() {
     );
 
     const snapshot = await getDocs(tweetQuery);
-
-    if (!snapshot.empty) {
-      const d = snapshot.docs[0].data();
-      console.log(d.id);
-    }
-
     const data = snapshot.docs.map((doc) => {
       const { tweet, createdAt, userId, username, photo } = doc.data();
       return {
@@ -40,7 +34,8 @@ export default function TweetDetail() {
         id: doc.id,
       };
     });
-    setTweet(data[0]);
+
+    data ? setTweet(data[0]) : setTweet(null);
   };
 
   useEffect(() => {
@@ -49,6 +44,7 @@ export default function TweetDetail() {
 
   return (
     <div>
+      {tweet ? "나나나" : "없어요"}
       <h1>{tweet?.id}</h1>
       <h1>{tweet?.tweet}</h1>
       <h1>{tweet?.userId}</h1>
