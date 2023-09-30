@@ -6,32 +6,34 @@ import { deleteObject, ref } from "firebase/storage";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled(Link)`
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 10px;
   border-bottom: 1px solid #38444d;
 `;
 
 const Column = styled.div`
-  &:last-child {
-    place-self: end;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const Photo = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   border-radius: 15px;
 `;
 
 const Username = styled.span`
-  font-weight: 600;
-  font-size: 15px;
+  font-weight: 700;
+  font-size: 1rem;
 `;
 
 const Payload = styled.p`
   margin: 10px 0px;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 1rem;
 `;
 
 const Button = styled.button`
@@ -78,17 +80,26 @@ export default function Tweet({ username, photo, tweet, userId, id }: ITweet) {
 
   return (
     <Wrapper to={`/tweet/${id}`}>
+      <div>
+        {user?.photoURL ? (
+          <img
+            src={user?.photoURL || ""}
+            alt="avatar"
+            style={{ width: "40px", borderRadius: "50%" }}
+          />
+        ) : null}
+      </div>
       <Column>
         <Username>{username}</Username>
         <Payload>{tweet}</Payload>
-        {user?.uid === userId ? (
+        {photo ? <Photo src={photo} /> : null}
+        {/* {user?.uid === userId ? (
           <ButtonWrapper>
             <DeleteButton onClick={onDelete}>Delete</DeleteButton>
             <UpdateButton>Update</UpdateButton>
           </ButtonWrapper>
-        ) : null}
+        ) : null} */}
       </Column>
-      <Column>{photo ? <Photo src={photo} /> : null}</Column>
     </Wrapper>
   );
 }

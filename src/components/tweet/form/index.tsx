@@ -1,7 +1,7 @@
-import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { styled } from "styled-components";
-import { auth, db, storage } from "../../../firebase";
+import { auth, db, storage } from "@/firebase";
+import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const Form = styled.form`
@@ -9,9 +9,9 @@ const Form = styled.form`
   display: flex;
   items-align: center;
   gap: 10px;
+  padding: 20px 20px 10px 20px;
   border-top: 1px solid #38444d;
   border-bottom: 1px solid #38444d;
-  padding: 20px 10px 5px 10px;
 `;
 
 const TextArea = styled.textarea`
