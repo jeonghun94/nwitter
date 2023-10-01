@@ -1,19 +1,22 @@
-import { styled } from "styled-components";
-import { ITweet } from "./timeline";
-import { auth, db, storage } from "../firebase";
-import { deleteDoc, doc } from "firebase/firestore";
-import { deleteObject, ref } from "firebase/storage";
-import { Link } from "react-router-dom";
+import { styled } from 'styled-components';
+import { ITweet } from './timeline';
+import { auth, db, storage } from '../firebase';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { deleteObject, ref } from 'firebase/storage';
+import { Link } from 'react-router-dom';
+import { getTimeAgoString } from '@/utils';
 
 const Wrapper = styled(Link)`
   display: flex;
   align-items: flex-start;
   gap: 20px;
-  padding: 10px 30px 10px 20px;
+  padding: 15px;
+  // padding: 10px 30px 10px 20px;
   border-bottom: 1px solid #38444d;
 `;
 
 const Column = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -25,9 +28,18 @@ const Photo = styled.img`
   border-radius: 15px;
 `;
 
-const Username = styled.span`
+const Username = styled.p`
+  display: flex;
+  align-items: center;
   font-weight: 700;
   font-size: 1rem;
+`;
+
+const CreatedAt = styled.span`
+  margin-left: 10px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #71767b;
 `;
 
 const Payload = styled.p`
@@ -60,13 +72,20 @@ const UpdateButton = styled(Button)`
   background-color: #1d9bf0;
 `;
 
-export default function Tweet({ username, photo, tweet, userId, id }: ITweet) {
+export default function Tweet({
+  username,
+  photo,
+  tweet,
+  userId,
+  id,
+  createdAt,
+}: ITweet) {
   const user = auth.currentUser;
   const onDelete = async () => {
-    const ok = confirm("Are you sure you want to delete this tweet?");
+    const ok = confirm('Are you sure you want to delete this tweet?');
     if (!ok || user?.uid !== userId) return;
     try {
-      await deleteDoc(doc(db, "tweets", id));
+      await deleteDoc(doc(db, 'tweets', id));
       if (photo) {
         const photoRef = ref(storage, `tweets/${user.uid}/${id}`);
         await deleteObject(photoRef);
@@ -80,19 +99,59 @@ export default function Tweet({ username, photo, tweet, userId, id }: ITweet) {
 
   return (
     <Wrapper to={`/tweet/${id}`}>
-      <div>
+      <div
+        style={{
+          minWidth: '40px',
+        }}
+      >
         {user?.photoURL ? (
           <img
-            src={user?.photoURL || ""}
+            src={user?.photoURL || ''}
             alt="avatar"
-            style={{ width: "40px", borderRadius: "50%" }}
+            style={{ width: '40px', borderRadius: '50%' }}
           />
         ) : null}
       </div>
       <Column>
-        <Username>{username}</Username>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Username>
+            {username}
+            <CreatedAt>{getTimeAgoString(createdAt)}</CreatedAt>
+          </Username>
+
+          <svg
+            width={20}
+            height={20}
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            style={{
+              fill: '#71767b',
+            }}
+          >
+            <g>
+              <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
+            </g>
+          </svg>
+        </div>
         <Payload>{tweet}</Payload>
-        {photo ? <Photo src={photo} /> : null}
+
+        {photo && <Photo src={photo} />}
+
+        <div
+          style={{
+            width: '100%',
+            height: '40px',
+            border: '1px solid #38444d',
+            marginTop: '15px',
+          }}
+        ></div>
         {/* {user?.uid === userId ? (
           <ButtonWrapper>
             <DeleteButton onClick={onDelete}>Delete</DeleteButton>

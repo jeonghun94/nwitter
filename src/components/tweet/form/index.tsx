@@ -1,17 +1,18 @@
-import { useState } from "react";
-import { styled } from "styled-components";
-import { auth, db, storage } from "@/firebase";
-import { addDoc, collection, updateDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useState } from 'react';
+import { styled } from 'styled-components';
+import { auth, db, storage } from '@/firebase';
+import { addDoc, collection, updateDoc } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 const Form = styled.form`
   width: 100%;
   display: flex;
   items-align: center;
   gap: 10px;
-  padding: 20px 20px 10px 20px;
-  border-top: 1px solid #38444d;
-  border-bottom: 1px solid #38444d;
+  padding: 15px;
+  border: 1px solid #38444d;
+  border-left: none;
+  border-right: none;
 `;
 
 const TextArea = styled.textarea`
@@ -23,8 +24,8 @@ const TextArea = styled.textarea`
   background-color: black;
   width: 100%;
   resize: none;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   &::placeholder {
     font-size: 1.3rem;
   }
@@ -69,7 +70,7 @@ export default function PostTweetForm() {
 
   console.log(user?.photoURL);
   const [isLoading, setLoading] = useState(false);
-  const [tweet, setTweet] = useState("");
+  const [tweet, setTweet] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTweet(e.target.value);
@@ -83,13 +84,13 @@ export default function PostTweetForm() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const user = auth.currentUser;
-    if (!user || isLoading || tweet === "" || tweet.length > 180) return;
+    if (!user || isLoading || tweet === '' || tweet.length > 180) return;
     try {
       setLoading(true);
-      const doc = await addDoc(collection(db, "tweets"), {
+      const doc = await addDoc(collection(db, 'tweets'), {
         tweet,
         createdAt: Date.now(),
-        username: user.displayName || "Anonymous",
+        username: user.displayName || 'Anonymous',
         userId: user.uid,
       });
       if (file) {
@@ -100,7 +101,7 @@ export default function PostTweetForm() {
           photo: url,
         });
       }
-      setTweet("");
+      setTweet('');
       setFile(null);
     } catch (e) {
       console.log(e);
@@ -112,17 +113,17 @@ export default function PostTweetForm() {
     <Form onSubmit={onSubmit}>
       <div>
         <img
-          src={user?.photoURL || ""}
+          src={user?.photoURL || ''}
           alt="avatar"
-          style={{ width: "40px", borderRadius: "50%" }}
+          style={{ width: '40px', borderRadius: '50%' }}
         />
       </div>
 
       <div
         style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <TextArea
@@ -135,19 +136,19 @@ export default function PostTweetForm() {
         />
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
           <AttachFileButton htmlFor="file">
             {file ? (
-              "Photo added ✅"
+              'Photo added ✅'
             ) : (
               <div
                 style={{
-                  display: "flex",
-                  gap: "15px",
+                  display: 'flex',
+                  gap: '15px',
                 }}
               >
                 <svg
@@ -156,7 +157,7 @@ export default function PostTweetForm() {
                   width={20}
                   height={20}
                   style={{
-                    fill: "#1DA1F2",
+                    fill: '#1DA1F2',
                   }}
                 >
                   <g>
@@ -167,7 +168,7 @@ export default function PostTweetForm() {
                   width={20}
                   height={20}
                   style={{
-                    fill: "#1DA1F2",
+                    fill: '#1DA1F2',
                     opacity: 0.5,
                   }}
                   viewBox="0 0 24 24"
@@ -181,7 +182,7 @@ export default function PostTweetForm() {
                   width={20}
                   height={20}
                   style={{
-                    fill: "#1DA1F2",
+                    fill: '#1DA1F2',
                     opacity: 0.5,
                   }}
                   viewBox="0 0 24 24"
@@ -195,7 +196,7 @@ export default function PostTweetForm() {
                   width={20}
                   height={20}
                   style={{
-                    fill: "#1DA1F2",
+                    fill: '#1DA1F2',
                     opacity: 0.5,
                   }}
                   viewBox="0 0 24 24"
@@ -214,7 +215,7 @@ export default function PostTweetForm() {
             id="file"
             accept="image/*"
           />
-          <SubmitBtn type="submit" value={isLoading ? "Posting..." : "Post"} />
+          <SubmitBtn type="submit" value={isLoading ? 'Posting...' : 'Post'} />
         </div>
       </div>
     </Form>

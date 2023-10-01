@@ -1,10 +1,10 @@
-import { styled } from "styled-components";
-import PostTweetForm from "@/components/tweet/form";
-import Timeline from "@/components/timeline";
+import { styled } from 'styled-components';
+import PostTweetForm from '@/components/tweet/form';
+import Timeline from '@/components/timeline';
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 5fr;
+  display: flex;
+  flex-direction: column;
   overflow-y: scroll;
 `;
 
