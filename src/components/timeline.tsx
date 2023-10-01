@@ -73,6 +73,8 @@ export default function Timeline() {
       {tweets.map((tweet) => (
         <Tweet key={tweet.id} {...tweet} />
       ))}
+
+      <div className="text-red-300 border-red-200">ddsd</div>
     </Wrapper>
   );
 }

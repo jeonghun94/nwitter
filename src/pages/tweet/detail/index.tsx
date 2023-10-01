@@ -44,12 +44,12 @@ export default function TweetDetail() {
 
   return (
     <div>
-      {tweet ? "나나나" : "없어요"}
-      <h1>{tweet?.id}</h1>
+      <h1 className="text-red-400">{tweet?.id}</h1>
       <h1>{tweet?.tweet}</h1>
       <h1>{tweet?.userId}</h1>
       <h1>{tweet?.username}</h1>
       <h1>{tweet?.photo}</h1>
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
     </div>
   );
 }

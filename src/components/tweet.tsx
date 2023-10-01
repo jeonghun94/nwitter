@@ -9,7 +9,7 @@ const Wrapper = styled(Link)`
   display: flex;
   align-items: flex-start;
   gap: 20px;
-  padding: 10px;
+  padding: 10px 30px 10px 20px;
   border-bottom: 1px solid #38444d;
 `;
 
