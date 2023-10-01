@@ -1,8 +1,8 @@
-import { styled } from "styled-components";
-import { auth, db, storage } from "@/firebase";
-import { useEffect, useState } from "react";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { updateProfile } from "firebase/auth";
+import { styled } from 'styled-components';
+import { auth, db, storage } from '@/firebase';
+import { useEffect, useState } from 'react';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { updateProfile } from 'firebase/auth';
 import {
   collection,
   getDocs,
@@ -10,9 +10,9 @@ import {
   orderBy,
   query,
   where,
-} from "firebase/firestore";
-import { ITweet } from "@/components/timeline";
-import Tweet from "@/components/tweet";
+} from 'firebase/firestore';
+import { ITweet } from '@/components/timeline';
+import Tweet from '@/components/Tweet';
 
 const Wrapper = styled.div`
   display: flex;
@@ -74,9 +74,9 @@ export default function Profile() {
 
   const fetchTweets = async () => {
     const tweetQuery = query(
-      collection(db, "tweets"),
-      where("userId", "==", user?.uid),
-      orderBy("createdAt", "desc"),
+      collection(db, 'tweets'),
+      where('userId', '==', user?.uid),
+      orderBy('createdAt', 'desc'),
       limit(25)
     );
     const snapshot = await getDocs(tweetQuery);
@@ -118,7 +118,7 @@ export default function Profile() {
         type="file"
         accept="image/*"
       />
-      <Name>{user?.displayName ?? "Anonymous"}</Name>
+      <Name>{user?.displayName ?? 'Anonymous'}</Name>
       <Tweets>
         {tweets.map((tweet) => (
           <Tweet key={tweet.id} {...tweet} />

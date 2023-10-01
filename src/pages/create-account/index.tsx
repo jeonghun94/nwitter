@@ -1,8 +1,8 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useState } from "react";
-import { auth } from "@/firebase";
-import { Link, useNavigate } from "react-router-dom";
-import { FirebaseError } from "firebase/app";
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { useState } from 'react';
+import { auth } from '@/firebase';
+import { Link, useNavigate } from 'react-router-dom';
+import { FirebaseError } from 'firebase/app';
 import {
   Form,
   Error,
@@ -10,32 +10,32 @@ import {
   Switcher,
   Title,
   Wrapper,
-} from "@/components/auth-components";
-import GithubButton from "@/components/button/github";
+} from '@/components/auth-components';
+import GithubButton from '@/components/Button/github';
 
 export default function CreateAccount() {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
     } = e;
-    if (name === "name") {
+    if (name === 'name') {
       setName(value);
-    } else if (name === "email") {
+    } else if (name === 'email') {
       setEmail(value);
-    } else if (name === "password") {
+    } else if (name === 'password') {
       setPassword(value);
     }
   };
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
-    if (isLoading || name === "" || email === "" || password === "") return;
+    setError('');
+    if (isLoading || name === '' || email === '' || password === '') return;
     try {
       setLoading(true);
       const credentials = await createUserWithEmailAndPassword(
@@ -47,7 +47,7 @@ export default function CreateAccount() {
       await updateProfile(credentials.user, {
         displayName: name,
       });
-      navigate("/");
+      navigate('/');
     } catch (e) {
       if (e instanceof FirebaseError) {
         setError(e.message);
@@ -86,10 +86,10 @@ export default function CreateAccount() {
         />
         <Input
           type="submit"
-          value={isLoading ? "Loading..." : "Create Account"}
+          value={isLoading ? 'Loading...' : 'Create Account'}
         />
       </Form>
-      {error !== "" ? <Error>{error}</Error> : null}
+      {error !== '' ? <Error>{error}</Error> : null}
       <Switcher>
         Already have an account? <Link to="/login">Log in &rarr;</Link>
       </Switcher>

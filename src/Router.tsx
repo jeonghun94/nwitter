@@ -1,15 +1,15 @@
-import { createBrowserRouter } from "react-router-dom";
-import ProtectedRoute from "./components/protected-router";
-import Layout from "./components/layout";
-import TweetDetail from "./pages/tweet/detail";
-import Home from "./pages/home";
-import Login from "./pages/login";
-import Profile from "./pages/profile";
-import CreateAccount from "./pages/create-account";
+import { createBrowserRouter } from 'react-router-dom';
+import ProtectedRoute from './components/protected-router';
+import Layout from './components/Layout/layout';
+import TweetDetail from './pages/tweet/detail';
+import Home from './pages/home';
+import Login from './pages/login';
+import Profile from './pages/profile';
+import CreateAccount from './pages/create-account';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: (
       <ProtectedRoute>
         <Layout />
@@ -17,25 +17,25 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "",
+        path: '',
         element: <Home />,
       },
       {
-        path: "profile",
+        path: 'profile',
         element: <Profile />,
       },
       {
-        path: "/tweet/:id",
+        path: '/tweet/:id',
         element: <TweetDetail />,
       },
     ],
   },
   {
-    path: "/login",
+    path: '/login',
     element: <Login />,
   },
   {
-    path: "/create-account",
+    path: '/create-account',
     element: <CreateAccount />,
   },
 ]);

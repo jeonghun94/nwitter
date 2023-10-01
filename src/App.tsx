@@ -1,10 +1,10 @@
-import { RouterProvider } from "react-router-dom";
-import { styled } from "styled-components";
-import router from "./Router";
-import { useEffect, useState } from "react";
-import LoadingScreen from "./components/loading-screen";
-import { auth } from "./firebase";
-import GlobalStyles from "./styles/GlobalStyles";
+import { RouterProvider } from 'react-router-dom';
+import { styled } from 'styled-components';
+import router from './Router';
+import { useEffect, useState } from 'react';
+import Loading from './components/Loading';
+import { auth } from './firebase';
+import GlobalStyles from './styles/GlobalStyles';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -24,7 +24,7 @@ function App() {
   return (
     <Wrapper>
       <GlobalStyles />
-      {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
+      {isLoading ? <Loading /> : <RouterProvider router={router} />}
     </Wrapper>
   );
 }

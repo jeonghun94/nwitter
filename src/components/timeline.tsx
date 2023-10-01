@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { db } from '../firebase';
-import Tweet from './tweet';
+import Tweet from './Tweet';
 import { Unsubscribe } from 'firebase/auth';
 
 export interface ITweet {
